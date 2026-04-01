@@ -48,7 +48,7 @@ export default function TransactionList() {
               <div className="flex flex-col">
                 <span className="text-sm font-medium text-gray-800">{t.description}</span>
                 <span className="text-xs text-gray-400 mt-0.5">
-                  {t.category} · {new Date(t.date).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
+                  {t.category} · {t.type} · {new Date(t.date).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
                 </span>
               </div>
               <div className="flex items-center gap-4">

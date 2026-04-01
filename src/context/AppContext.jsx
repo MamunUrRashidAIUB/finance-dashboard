@@ -4,9 +4,25 @@ import { mockTransactions } from "@/data/mockData";
 
 const AppContext = createContext(null);
 
+function getInitialTransactions() {
+  if (typeof window === "undefined") return mockTransactions;
+  const stored = localStorage.getItem("transactions");
+  if (stored === null) return mockTransactions;
+  try {
+    return JSON.parse(stored);
+  } catch {
+    return mockTransactions;
+  }
+}
+
+function getInitialRole() {
+  if (typeof window === "undefined") return "viewer";
+  return localStorage.getItem("role") || "viewer";
+}
+
 export function AppProvider({ children }) {
-  const [transactions, setTransactions] = useState([]);
-  const [role, setRole] = useState("viewer");
+  const [transactions, setTransactions] = useState(getInitialTransactions);
+  const [role, setRole] = useState(getInitialRole);
   const [filters, setFilters] = useState({
     search: "",
     type: "all",
@@ -14,24 +30,9 @@ export function AppProvider({ children }) {
     sortBy: "date-desc",
   });
 
-  // Load from localStorage or fall back to mock data
-  useEffect(() => {
-    const stored = localStorage.getItem("transactions");
-    if (stored) {
-      setTransactions(JSON.parse(stored));
-    } else {
-      setTransactions(mockTransactions);
-    }
-
-    const storedRole = localStorage.getItem("role");
-    if (storedRole) setRole(storedRole);
-  }, []);
-
   // Persist transactions to localStorage on change
   useEffect(() => {
-    if (transactions.length > 0) {
-      localStorage.setItem("transactions", JSON.stringify(transactions));
-    }
+    localStorage.setItem("transactions", JSON.stringify(transactions));
   }, [transactions]);
 
   // Persist role

@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Finance Dashboard UI
 
-## Getting Started
+A frontend-only finance dashboard built for the Zorvyn Frontend Developer Intern assignment.
 
-First, run the development server:
+## Tech Stack
+
+- Next.js (App Router)
+- React
+- Tailwind CSS
+- Recharts
+- Context API for state management
+
+## Features
+
+### 1) Dashboard Overview
+
+- Summary cards: Total Balance, Total Income, Total Expenses
+- Time-based visualization: monthly balance trend (income vs expenses)
+- Category-based visualization: spending breakdown by category
+
+### 2) Transactions Section
+
+- Transaction list with: date, amount, category, type
+- Add/Edit/Delete transactions (Admin only)
+- Filtering by category/type
+- Search by description/category
+- Sorting by date and amount
+- Reset filters
+
+### 3) Role-Based UI (frontend simulation)
+
+- Viewer: read-only mode
+- Admin: can add/edit/delete transactions
+- Role switcher in sidebar
+- Role badge in topbar
+
+### 4) Insights Section
+
+- Highest spending category
+- Month-over-month expense comparison
+- Dynamic observations derived from current data
+- Empty state when no data exists
+
+### 5) State Management
+
+Global app state is managed in `AppContext`:
+
+- `transactions`
+- `filters`
+- `role`
+
+Data and role persist in `localStorage`.
+
+## Project Structure
+
+- `src/app`: routes and root layout
+- `src/components/layout`: sidebar and topbar
+- `src/components/dashboard`: summary cards and dashboard charts
+- `src/components/transactions`: list, filters, and add/edit modal
+- `src/components/insights`: insights panel and page wrapper
+- `src/components/ui`: shared UI elements (empty state, role badge)
+- `src/context`: global app context
+- `src/data`: mock transactions dataset
+- `src/utils`: calculation and filtering helpers
+
+## Setup & Run
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+1. Run development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`http://localhost:3000`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Assignment Requirement Mapping
 
-## Learn More
+- Dashboard summary + 2 charts: implemented
+- Transaction exploration + filter/search/sort: implemented
+- Role-based UI behavior: implemented
+- Insights from data: implemented
+- State handling (transactions/filters/role): implemented
+- Responsive + empty states: implemented
 
-To learn more about Next.js, take a look at the following resources:
+## Notes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- This is frontend-only and uses mock/static data.
+- No backend or authentication logic is included.

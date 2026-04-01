@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useApp } from "@/context/AppContext";
 
 const categories = ["Income", "Housing", "Food", "Transport", "Entertainment", "Health"];
@@ -7,12 +7,10 @@ const empty = { description: "", amount: "", category: "Food", type: "expense", 
 
 export default function AddEditModal({ existing, onClose }) {
   const { transactions, setTransactions } = useApp();
-  const [form, setForm] = useState(empty);
+  const [form, setForm] = useState(() =>
+    existing ? { ...existing, amount: String(existing.amount) } : empty
+  );
   const [error, setError] = useState("");
-
-  useEffect(() => {
-    if (existing) setForm({ ...existing, amount: String(existing.amount) });
-  }, [existing]);
 
   const update = (key, value) => setForm((prev) => ({ ...prev, [key]: value }));
 
