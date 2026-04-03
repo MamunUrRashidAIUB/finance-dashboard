@@ -29,7 +29,6 @@ export default function TransactionList() {
     <div className="relative overflow-hidden bg-white rounded-2xl border border-slate-200 shadow-sm">
       <div className="pointer-events-none absolute -bottom-16 -left-10 h-32 w-32 rounded-full bg-blue-100 blur-3xl" />
 
-      {/* Header */}
       <div className="relative flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between px-4 sm:px-5 py-4 border-b border-slate-100">
         <div className="flex items-center gap-2">
           <p className="text-sm font-semibold text-slate-700">
@@ -51,7 +50,6 @@ export default function TransactionList() {
         )}
       </div>
 
-      {/* List */}
       {filtered.length === 0 ? (
         <EmptyState message="No transactions match your filters" />
       ) : showFancyAllView ? (

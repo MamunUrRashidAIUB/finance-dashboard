@@ -69,10 +69,7 @@ export default function InsightsPanel() {
   return (
     <div className="flex flex-col gap-4">
 
-      {/* Top row — 3 stat cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-
-        {/* Highest spending category */}
         <InsightCard title="Top Spending Category">
           {highest ? (
             <>
@@ -84,7 +81,6 @@ export default function InsightsPanel() {
           )}
         </InsightCard>
 
-        {/* Savings rate */}
         <InsightCard title="Savings Rate">
           <p className={`text-2xl font-black tracking-tight ${Number(savingsRate) >= 0 ? "text-emerald-600" : "text-rose-500"}`}>
             {savingsRate}%
@@ -92,7 +88,6 @@ export default function InsightsPanel() {
           <p className="text-sm text-slate-600 mt-1">Of total income saved</p>
         </InsightCard>
 
-        {/* Month comparison */}
         <InsightCard title="Month on Month Expenses">
           {comparison ? (
             <>
@@ -112,7 +107,6 @@ export default function InsightsPanel() {
         </InsightCard>
       </div>
 
-      {/* Bar chart — spending by category */}
       <InsightCard title="Spending by Category">
         {breakdown.length === 0 ? (
           <p className="text-sm text-gray-400 text-center py-10">No expense data</p>
@@ -133,7 +127,6 @@ export default function InsightsPanel() {
         )}
       </InsightCard>
 
-      {/* Observations */}
       <InsightCard title="Observations">
         <ul className="flex flex-col gap-2.5">
           {highest && (

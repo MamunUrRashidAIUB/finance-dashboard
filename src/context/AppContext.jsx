@@ -30,12 +30,10 @@ export function AppProvider({ children }) {
     sortBy: "date-desc",
   });
 
-  // Persist transactions to localStorage on change
   useEffect(() => {
     localStorage.setItem("transactions", JSON.stringify(transactions));
   }, [transactions]);
 
-  // Persist role
   useEffect(() => {
     localStorage.setItem("role", role);
   }, [role]);

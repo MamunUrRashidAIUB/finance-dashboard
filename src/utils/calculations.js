@@ -1,24 +1,19 @@
-// Total income from all transactions
 export function getTotalIncome(transactions) {
   return transactions
     .filter((t) => t.type === "income")
     .reduce((sum, t) => sum + t.amount, 0);
 }
 
-// Total expenses from all transactions
 export function getTotalExpenses(transactions) {
   return transactions
     .filter((t) => t.type === "expense")
     .reduce((sum, t) => sum + t.amount, 0);
 }
 
-// Balance = income - expenses
 export function getBalance(transactions) {
   return getTotalIncome(transactions) - getTotalExpenses(transactions);
 }
 
-// Group transactions by month, return array for line chart
-// Output: [{ month: "Jan 2026", income: 107000, expenses: 33600 }, ...]
 export function getMonthlyTrend(transactions) {
   const map = {};
 
@@ -32,14 +27,11 @@ export function getMonthlyTrend(transactions) {
     else map[key].expenses += t.amount;
   });
 
-  // Sort chronologically
   return Object.values(map).sort(
     (a, b) => new Date("1 " + a.month) - new Date("1 " + b.month)
   );
 }
 
-// Group expenses by category for pie/bar chart
-// Output: [{ category: "Housing", amount: 75000 }, ...]
 export function getSpendingByCategory(transactions) {
   const map = {};
 
@@ -55,14 +47,11 @@ export function getSpendingByCategory(transactions) {
     .sort((a, b) => b.amount - a.amount);
 }
 
-// Highest spending category
 export function getHighestCategory(transactions) {
   const breakdown = getSpendingByCategory(transactions);
   return breakdown.length > 0 ? breakdown[0] : null;
 }
 
-// Month over month expense comparison
-// Returns { current, previous, percentChange }
 export function getMonthComparison(transactions) {
   const trend = getMonthlyTrend(transactions);
   if (trend.length < 2) return null;
@@ -83,7 +72,6 @@ export function getMonthComparison(transactions) {
   };
 }
 
-// Format number as currency (Indian style)
 export function formatCurrency(amount) {
   return new Intl.NumberFormat("en-IN", {
     style: "currency",
@@ -92,7 +80,6 @@ export function formatCurrency(amount) {
   }).format(amount);
 }
 
-// Apply filters and sorting to transactions
 export function getFilteredTransactions(transactions, filters) {
   let result = [...transactions];
 
