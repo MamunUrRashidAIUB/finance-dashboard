@@ -137,21 +137,18 @@ export default function InsightsPanel() {
       <InsightCard title="Observations">
         <ul className="flex flex-col gap-2.5">
           {highest && (
-            <li className="text-sm text-slate-700 flex gap-2 rounded-lg border border-slate-100 bg-slate-50 px-3 py-2">
-              <span className="shrink-0">🔴</span>
+            <li className="text-sm text-slate-700 rounded-lg border border-slate-100 bg-slate-50 px-3 py-2">
               <span>Your highest spending category is <strong>{highest.category}</strong> at {formatCurrency(highest.amount)}.</span>
             </li>
           )}
           {comparison && (
-            <li className="text-sm text-slate-700 flex gap-2 rounded-lg border border-slate-100 bg-slate-50 px-3 py-2">
-              <span className="shrink-0">{comparison.percentChange > 0 ? "📈" : "📉"}</span>
+            <li className="text-sm text-slate-700 rounded-lg border border-slate-100 bg-slate-50 px-3 py-2">
               <span>
                 You spent <strong>{Math.abs(comparison.percentChange)}% {comparison.percentChange > 0 ? "more" : "less"}</strong> in {comparison.currentMonth} compared to {comparison.previousMonth}.
               </span>
             </li>
           )}
-          <li className="text-sm text-slate-700 flex gap-2 rounded-lg border border-slate-100 bg-slate-50 px-3 py-2">
-            <span className="shrink-0">{Number(savingsRate) >= 20 ? "✅" : "⚠️"}</span>
+          <li className="text-sm text-slate-700 rounded-lg border border-slate-100 bg-slate-50 px-3 py-2">
             <span>
               {Number(savingsRate) >= 20
                 ? `Great job — you're saving ${savingsRate}% of your income.`
@@ -159,8 +156,7 @@ export default function InsightsPanel() {
             </span>
           </li>
           {breakdown.length >= 2 && (
-            <li className="text-sm text-slate-700 flex gap-2 rounded-lg border border-slate-100 bg-slate-50 px-3 py-2">
-              <span className="shrink-0">💡</span>
+            <li className="text-sm text-slate-700 rounded-lg border border-slate-100 bg-slate-50 px-3 py-2">
               <span>
                 Your top 2 expense categories are <strong>{breakdown[0].category}</strong> and <strong>{breakdown[1].category}</strong>, accounting for {formatCurrency(breakdown[0].amount + breakdown[1].amount)} combined.
               </span>
