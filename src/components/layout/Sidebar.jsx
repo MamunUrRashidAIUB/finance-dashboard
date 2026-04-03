@@ -9,50 +9,76 @@ const navItems = [
   { label: "Insights", href: "/insights" },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen, onClose }) {
   const pathname = usePathname();
   const { role, setRole } = useApp();
 
   return (
-    <aside className="fixed top-0 left-0 h-screen w-60 bg-gray-900 text-white flex flex-col px-4 py-6 z-50">
-      {/* Logo */}
-      <div className="mb-10">
-        <span className="text-xl font-bold tracking-tight text-white">Zorvyn</span>
-        <span className="text-xs text-gray-400 block mt-0.5">Finance Dashboard</span>
-      </div>
+    <>
+      {isOpen && (
+        <button
+          type="button"
+          aria-label="Close sidebar"
+          onClick={onClose}
+          className="fixed inset-0 z-40 bg-black/40 lg:hidden"
+        />
+      )}
 
-      {/* Nav */}
-      <nav className="flex flex-col gap-1 flex-1">
-        {navItems.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-              pathname === item.href
-                ? "bg-blue-600 text-white"
-                : "text-gray-400 hover:bg-gray-800 hover:text-white"
-            }`}
+      <aside
+        className={`fixed top-0 left-0 h-screen w-60 text-white flex flex-col px-4 py-5 z-50 border-r border-white/10 bg-[radial-gradient(circle_at_top,#1f3b76_0%,#111827_45%,#070b14_100%)] overflow-hidden transition-transform duration-300 lg:translate-x-0 ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="pointer-events-none absolute -top-24 -left-20 h-56 w-56 rounded-full bg-cyan-300/20 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-24 -right-10 h-56 w-56 rounded-full bg-blue-500/20 blur-3xl" />
+
+        {/* Logo */}
+        <div className="relative mb-8">
+          <div className="inline-flex items-center justify-center rounded-xl bg-white/10 border border-white/20 px-3 py-2 backdrop-blur-sm shadow-lg shadow-black/20">
+            <span className="text-lg font-black tracking-[0.2em] text-white">XYZ</span>
+          </div>
+          <span className="text-[11px] text-slate-300/90 block mt-2 tracking-[0.16em] uppercase">Finance Dashboard</span>
+        </div>
+
+        {/* Nav */}
+        <nav className="relative flex flex-col gap-2 flex-1">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={onClose}
+              className={`group flex items-center justify-between rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200 ${
+                pathname === item.href
+                  ? "bg-linear-to-r from-blue-500 to-cyan-400 text-white shadow-md shadow-blue-900/40"
+                  : "text-slate-300 hover:text-white hover:bg-white/10"
+              }`}
+            >
+              <span>{item.label}</span>
+              <span
+                className={`h-2 w-2 rounded-full transition-all duration-200 ${
+                  pathname === item.href ? "bg-white" : "bg-slate-500/70 group-hover:bg-cyan-300"
+                }`}
+              />
+            </Link>
+          ))}
+        </nav>
+
+        {/* Role Switcher */}
+        <div className="relative mt-auto rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-3 shadow-lg shadow-black/20">
+          <p className="text-[10px] text-slate-300 mb-2 uppercase tracking-[0.2em]">Role</p>
+          <select
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            className="w-full bg-slate-900/70 text-white text-sm rounded-lg px-3 py-2 border border-slate-700 focus:outline-none focus:border-cyan-300 transition-colors"
           >
-            {item.label}
-          </Link>
-        ))}
-      </nav>
-
-      {/* Role Switcher */}
-      <div className="mt-auto">
-        <p className="text-xs text-gray-500 mb-1 uppercase tracking-wide">Role</p>
-        <select
-          value={role}
-          onChange={(e) => setRole(e.target.value)}
-          className="w-full bg-gray-800 text-white text-sm rounded-md px-3 py-2 border border-gray-700 focus:outline-none focus:border-blue-500"
-        >
-          <option value="viewer">Viewer</option>
-          <option value="admin">Admin</option>
-        </select>
-        <p className="text-xs text-gray-500 mt-2">
-          {role === "admin" ? "✏️ Can add & edit transactions" : "👁️ Read-only access"}
-        </p>
-      </div>
-    </aside>
+            <option value="viewer">Viewer</option>
+            <option value="admin">Admin</option>
+          </select>
+          <p className="text-xs text-slate-300 mt-2 leading-relaxed">
+            {role === "admin" ? "✏️ Can add & edit transactions" : "👁️ Read-only access"}
+          </p>
+        </div>
+      </aside>
+    </>
   );
 }
