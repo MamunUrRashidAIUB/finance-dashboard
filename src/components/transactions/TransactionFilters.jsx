@@ -31,7 +31,6 @@ export default function TransactionFilters() {
     <div className="relative overflow-hidden grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-3 bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm">
       <div className="pointer-events-none absolute -top-16 -right-10 h-32 w-32 rounded-full bg-cyan-100 blur-3xl" />
 
-      {/* Search */}
       <input
         type="text"
         placeholder="Search transactions..."
@@ -40,14 +39,12 @@ export default function TransactionFilters() {
         className="relative border border-slate-200 bg-slate-50/70 rounded-lg px-3 py-2.5 text-sm w-full sm:col-span-2 xl:col-span-1 focus:outline-none focus:border-cyan-400 focus:bg-white transition-colors"
       />
 
-      {/* Type */}
       <FancySelect value={filters.type} onChange={(e) => update("type", e.target.value)}>
         <option value="all">All Types</option>
         <option value="income">Income</option>
         <option value="expense">Expense</option>
       </FancySelect>
 
-      {/* Category */}
       <FancySelect value={filters.category} onChange={(e) => update("category", e.target.value)}>
         {categories.map((c) => (
           <option key={c} value={c}>
@@ -56,7 +53,6 @@ export default function TransactionFilters() {
         ))}
       </FancySelect>
 
-      {/* Sort */}
       <FancySelect value={filters.sortBy} onChange={(e) => update("sortBy", e.target.value)}>
         <option value="date-desc">Newest First</option>
         <option value="date-asc">Oldest First</option>
@@ -64,7 +60,6 @@ export default function TransactionFilters() {
         <option value="amount-asc">Lowest Amount</option>
       </FancySelect>
 
-      {/* Reset */}
       <button
         onClick={() => setFilters({ search: "", type: "all", category: "all", sortBy: "date-desc" })}
         className="relative text-sm font-semibold text-cyan-700 hover:text-cyan-800 rounded-lg border border-cyan-200 bg-cyan-50 px-3 py-2.5 text-left sm:text-center transition-colors"

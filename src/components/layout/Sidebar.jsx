@@ -32,7 +32,6 @@ export default function Sidebar({ isOpen, onClose }) {
         <div className="pointer-events-none absolute -top-24 -left-20 h-56 w-56 rounded-full bg-cyan-300/20 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-24 -right-10 h-56 w-56 rounded-full bg-blue-500/20 blur-3xl" />
 
-        {/* Logo */}
         <div className="relative mb-8">
           <div className="inline-flex items-center justify-center rounded-xl bg-white/10 border border-white/20 px-3 py-2 backdrop-blur-sm shadow-lg shadow-black/20">
             <span className="text-lg font-black tracking-[0.2em] text-white">XYZ</span>
@@ -40,7 +39,6 @@ export default function Sidebar({ isOpen, onClose }) {
           <span className="text-[11px] text-slate-300/90 block mt-2 tracking-[0.16em] uppercase">Finance Dashboard</span>
         </div>
 
-        {/* Nav */}
         <nav className="relative flex flex-col gap-2 flex-1">
           {navItems.map((item) => (
             <Link
@@ -63,7 +61,6 @@ export default function Sidebar({ isOpen, onClose }) {
           ))}
         </nav>
 
-        {/* Role Switcher */}
         <div className="relative mt-auto rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-3 shadow-lg shadow-black/20">
           <p className="text-[10px] text-slate-300 mb-2 uppercase tracking-[0.2em]">Role</p>
           <select
