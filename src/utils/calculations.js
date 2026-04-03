@@ -1,4 +1,4 @@
-m// Total income from all transactions
+// Total income from all transactions
 export function getTotalIncome(transactions) {
   return transactions
     .filter((t) => t.type === "income")
